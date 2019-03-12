@@ -1,5 +1,5 @@
 <?php
-// php artisan make:model Role -m
+//  php artisan make:model Role -m
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     //
+    protected $fillable = [
+        'title'
+    ];
 
-    // INVERSE MANY TO MANY RELATIONSHIP
+    // SETTING UP MANY TO MANY RELATIONSHIP WITH USERS
     public function users() {
         return $this->belongsToMany('App\User');
     }

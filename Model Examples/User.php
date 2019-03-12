@@ -36,22 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // ONE TO ONE RELATIONSHIP
-    public function post() {
-        return $this->hasOne('App\Post');
+    // SETTING UP A ONE TO ONE RELATIONSHIP FOR ADDRESSES AND USERS
+    public function address() {
+        return $this->hasOne('App\Address');
     }
-    // ONE TO MANY RELATIONSHIP
+    // SETTING UP A ONE TO MANY RELATIONSHIP FOR POSTS AND USERS
     public function posts() {
         return $this->hasMany('App\Post');
     }
-    // MANY TO MANY RELATIONSHIP
+    // SETTING UP MANY TO MANY RELATIONSHIP FOR ROLES AND USERS
     public function roles() {
-        // LET THE MODEL KNOW WITH WITHPIVOT METHOD WHAT COLUMN TO TAKE
-        return $this->belongsToMany('App\Role')->withPivot('created_at');
+        return $this->belongsToMany('App\Role');
     }
-    // POLYMORPHIC RELATIONSHIPS
-    public function photos() {
-        return $this->morphMany('App\Photo', 'imageable');
-    }
-
 }
